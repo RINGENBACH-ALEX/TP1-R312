@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PlotFigure from '../components/PlotFigure.astro';
+import * as Plot from '@observablehq/plot';
+import alphabet from '../data/alphabet.json';
+import aapl from '../data/aapl.json';
+import mtcars from '../data/mtcars.json';
+
+const aaplDates = aapl.map((d) => ({ ...d, Date: new Date(d.Date) }));
+---
+
+<Layout title="Autres exemples">
+	<h1 class="text-3xl font-bold">Autres exemples de la librairie Plot</h1>
+	<p class="mt-4 text-slate-700">
+		Quelques exemples classiques repris de la
+		<a class="underline" href="https://observablehq.com/@observablehq/plot-gallery">
+			galerie d'exemples d'Observable Plot
+		</a>, avec des jeux de données réduits aux seules colonnes nécessaires.
+	</p>
+
+	<PlotFigure
+		caption="Figure 3. Fréquence des lettres dans la langue anglaise."
+		options={{
+			title: 'Fréquence des lettres en anglais',
+			ariaLabel: 'Diagramme en barres de la fréquence des lettres en anglais',
+			marginLeft: 40,
+			x: { label: 'Lettre' },
+			y: { label: 'Fréquence (%)', percent: true },
+			marks: [Plot.barY(alphabet, { x: 'letter', y: 'frequency', fill: 'steelblue' }), Plot.ruleY([0])],
+		}}
+	/>
+
+	<PlotFigure
+		caption="Figure 4. Cours de clôture de l'action Apple (AAPL)."
+		options={{
+			title: "Cours de l'action Apple (AAPL)",
+			ariaLabel: "Courbe du cours de clôture de l'action Apple entre 2013 et 2018",
+			x: { type: 'utc', label: null },
+			y: { grid: true, label: 'Clôture ($)' },
+			marks: [Plot.lineY(aaplDates, { x: 'Date', y: 'Close' })],
+		}}
+	/>
+
+	<PlotFigure
+		caption="Figure 5. Consommation (mpg) en fonction de la puissance (hp), jeu de données mtcars."
+		options={{
+			title: 'Consommation vs puissance des voitures',
+			subtitle: 'Jeu de données mtcars (1974 Motor Trend US)',
+			ariaLabel: 'Nuage de points des miles par gallon en fonction de la puissance en chevaux, coloré par nombre de cylindres',
+			grid: true,
+			color: { type: 'ordinal', legend: true, label: 'Cylindres' },
+			x: { label: 'Puissance (hp)' },
+			y: { label: 'Consommation (mpg)' },
+			marks: [Plot.dot(mtcars, { x: 'hp', y: 'mpg', stroke: 'cyl', r: 'wt' })],
+		}}
+	/>
+</Layout>

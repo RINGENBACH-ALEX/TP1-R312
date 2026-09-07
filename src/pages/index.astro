@@ -1,11 +1,24 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Accueil">
+	<h1 class="text-3xl font-bold">TP R3.12 — Astro & Observable Plot</h1>
+	<p class="mt-4 text-slate-700">
+		Ce projet Astro reprend le composant <code>PlotFigure.astro</code> vu en TD (Observable Plot
+		rendu côté serveur avec JSDOM) et l'utilise pour afficher plusieurs graphiques.
+	</p>
+
+	<ul class="mt-6 flex flex-col gap-2">
+		<li>
+			<a class="text-blue-700 underline hover:no-underline" href="/penguins">
+				Exemple des penguins (nuage de points)
+			</a>
+		</li>
+		<li>
+			<a class="text-blue-700 underline hover:no-underline" href="/examples">
+				Autres exemples de la librairie Observable Plot
+			</a>
+		</li>
+	</ul>
 </Layout>
