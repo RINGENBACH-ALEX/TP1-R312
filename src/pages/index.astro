@@ -1,24 +1,83 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const cards = [
+	{
+		href: '/penguins',
+		index: '01',
+		title: 'Penguins',
+		description:
+			"Nuage de points et histogramme sur le jeu de données Palmer Penguins (344 individus, 3 espèces).",
+		cta: "Voir l'exemple",
+	},
+	{
+		href: '/examples',
+		index: '02',
+		title: 'Autres exemples',
+		description:
+			"Fréquence des lettres, cours de l'action Apple, athlètes olympiques, température mondiale…",
+		cta: 'Voir les exemples',
+	},
+];
+
+const features = [
+	'Rendu côté serveur (SSG) avec Observable Plot + JSDOM, zéro JS côté client',
+	'title, subtitle, caption et ariaLabel sur chaque graphique pour l’accessibilité',
+	'Jeux de données JSON filtrés et échantillonnés pour rester légers',
+];
 ---
 
 <Layout title="Accueil">
-	<h1 class="text-3xl font-bold">TP R3.12 — Astro & Observable Plot</h1>
-	<p class="mt-4 text-slate-700">
-		Ce projet Astro reprend le composant <code>PlotFigure.astro</code> vu en TD (Observable Plot
-		rendu côté serveur avec JSDOM) et l'utilise pour afficher plusieurs graphiques.
-	</p>
+	<section class="relative overflow-hidden rounded-[2.5rem] border border-white/10 px-6 py-16 text-center sm:py-20">
+		<div
+			class="pointer-events-none absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-crimson/20 blur-[120px]"
+			aria-hidden="true"
+		>
+		</div>
 
-	<ul class="mt-6 flex flex-col gap-2">
-		<li>
-			<a class="text-blue-700 underline hover:no-underline" href="/penguins">
-				Exemple des penguins (nuage de points)
-			</a>
-		</li>
-		<li>
-			<a class="text-blue-700 underline hover:no-underline" href="/examples">
-				Autres exemples de la librairie Observable Plot
-			</a>
-		</li>
+		<div class="relative">
+			<p
+				class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-bold tracking-[.18em] text-white/70 uppercase"
+			>
+				TP R3.12 · Astro + Observable Plot
+			</p>
+			<h1 class="font-display text-4xl leading-tight tracking-tight text-balance sm:text-6xl">
+				Des graphiques <span class="text-crimson">rendus côté serveur</span>
+			</h1>
+			<p class="mx-auto mt-6 max-w-xl text-white/70">
+				Ce projet reprend le composant <code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">PlotFigure.astro</code
+				> vu en TD : Observable Plot s'exécute côté serveur avec JSDOM, puis le SVG obtenu est injecté
+				directement dans la page.
+			</p>
+		</div>
+	</section>
+
+	<div class="mt-10 grid gap-6 sm:grid-cols-2">
+		{
+			cards.map((card) => (
+				<a
+					href={card.href}
+					class="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition hover:border-crimson/40 hover:bg-white/[0.06]"
+				>
+					<span class="font-display text-sm text-white/35">{card.index}</span>
+					<h2 class="font-display mt-3 text-xl">{card.title}</h2>
+					<p class="mt-2 text-sm text-white/65">{card.description}</p>
+					<span class="mt-5 inline-flex items-center gap-1 text-sm font-bold text-crimson transition-transform group-hover:translate-x-1">
+						{card.cta} →
+					</span>
+				</a>
+			))
+		}
+	</div>
+
+	<ul class="mt-6 grid gap-4 text-sm text-white/65 sm:grid-cols-3">
+		{
+			features.map((text) => (
+				<li class="rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+					<span class="mb-2 block h-px w-6 bg-crimson" aria-hidden="true" />
+					{text}
+				</li>
+			))
+		}
 	</ul>
 </Layout>

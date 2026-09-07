@@ -1,1 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Bevan&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+
+@theme {
+	--font-display: "Bevan", Georgia, serif;
+	--font-sans: "Inter", Arial, Helvetica, sans-serif;
+	--color-crimson: #c50337;
+	--color-ink: #02060e;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--color-ink);
+	color: #fff;
+	font-family: var(--font-sans);
+}
+
+::selection {
+	background: var(--color-crimson);
+	color: #fff;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-crimson);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+/* PlotFigure.astro injects Plot's own <figure> (h2 title / h3 subtitle / svg / figcaption).
+   Plot's SVG text inherits `currentColor`, so setting `color` here re-themes axes/legends too. */
+main figure {
+	margin: 0;
+	padding: 1.75rem;
+	background: rgb(255 255 255 / 3%);
+	border: 1px solid rgb(255 255 255 / 10%);
+	border-radius: 1.75rem;
+	color: #fff;
+}
+
+main figure h2 {
+	margin: 0 0 0.2rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #fff;
+}
+
+main figure h3 {
+	margin: 0 0 1.25rem;
+	font-size: 0.85rem;
+	font-weight: 400;
+	color: rgb(255 255 255 / 55%);
+}
+
+main figure svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+main figure figcaption {
+	margin-top: 1rem;
+	padding-top: 0.75rem;
+	border-top: 1px dashed rgb(255 255 255 / 12%);
+	font-size: 0.75rem;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	color: rgb(255 255 255 / 45%);
+}

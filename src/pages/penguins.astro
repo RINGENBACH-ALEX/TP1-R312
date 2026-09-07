@@ -6,47 +6,59 @@ import penguins from '../data/penguins.json';
 ---
 
 <Layout title="Penguins">
-	<h1 class="text-3xl font-bold">Exemple des penguins</h1>
-	<p class="mt-4 text-slate-700">
-		Jeu de données <code>penguins.json</code> ({penguins.length} manchots, colonnes utiles
-		uniquement : <code>species</code>, <code>island</code>, <code>culmen_length_mm</code>,
-		<code>culmen_depth_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>,
-		<code>sex</code>) affiché avec Observable Plot, comme dans la
-		<a class="underline" href="https://observablehq.com/plot/getting-started">documentation</a>.
+	<p
+		class="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-bold tracking-[.18em] text-white/70 uppercase"
+	>
+		Palmer Penguins
+	</p>
+	<h1 class="font-display text-3xl tracking-tight">Exemple des penguins</h1>
+	<p class="mt-4 max-w-2xl text-white/65">
+		Jeu de données <code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">penguins.json</code>
+		({penguins.length} manchots, colonnes utiles uniquement : <code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">species</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">island</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">culmen_length_mm</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">culmen_depth_mm</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">flipper_length_mm</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">body_mass_g</code>,
+		<code class="rounded bg-white/10 px-1.5 py-0.5 text-[0.85em]">sex</code>) affiché avec Observable Plot, comme
+		dans la
+		<a class="text-crimson underline hover:text-white" href="https://observablehq.com/plot/getting-started">documentation</a
+		>.
 	</p>
 
-	<PlotFigure
-		options={{
-			title: 'Longueur et profondeur du bec des manchots',
-			subtitle: 'Trois espèces de manchots de l\'archipel Palmer, Antarctique',
-			caption: 'Figure 1. Source : palmerpenguins (Gorman, Williams & Fraser, 2014).',
-			ariaLabel: 'Nuage de points de la longueur en fonction de la profondeur du bec des manchots, coloré par espèce',
-			grid: true,
-			color: { legend: true },
-			marks: [
-				Plot.dot(penguins, {
-					x: 'culmen_depth_mm',
-					y: 'culmen_length_mm',
-					stroke: 'species',
-					symbol: 'species',
-				}),
-			],
-		}}
-	/>
+	<div class="mt-10 grid gap-8">
+		<PlotFigure
+			options={{
+				title: 'Longueur et profondeur du bec des manchots',
+				subtitle: "Trois espèces de manchots de l'archipel Palmer, Antarctique",
+				caption: 'Figure 1. Source : palmerpenguins (Gorman, Williams & Fraser, 2014).',
+				ariaLabel:
+					'Nuage de points de la longueur en fonction de la profondeur du bec des manchots, coloré par espèce',
+				grid: true,
+				color: { legend: true },
+				marks: [
+					Plot.dot(penguins, {
+						x: 'culmen_depth_mm',
+						y: 'culmen_length_mm',
+						stroke: 'species',
+						strokeWidth: 1.5,
+						r: 4,
+					}),
+				],
+			}}
+		/>
 
-	<PlotFigure
-		options={{
-			title: 'Masse corporelle des manchots',
-			caption: 'Figure 2. Distribution de la masse corporelle des manchots par espèce.',
-			ariaLabel: 'Histogramme de la masse corporelle des manchots par espèce',
-			marginLeft: 60,
-			marks: [
-				Plot.rectY(
-					penguins,
-					Plot.binX({ y: 'count' }, { x: 'body_mass_g', fill: 'species' })
-				),
-				Plot.ruleY([0]),
-			],
-		}}
-	/>
+		<PlotFigure
+			options={{
+				title: 'Masse corporelle des manchots',
+				caption: 'Figure 2. Distribution de la masse corporelle des manchots par espèce.',
+				ariaLabel: 'Histogramme de la masse corporelle des manchots par espèce',
+				marginLeft: 60,
+				marks: [
+					Plot.rectY(penguins, Plot.binX({ y: 'count' }, { x: 'body_mass_g', fill: 'species' })),
+					Plot.ruleY([0]),
+				],
+			}}
+		/>
+	</div>
 </Layout>

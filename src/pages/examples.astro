@@ -5,53 +5,96 @@ import * as Plot from '@observablehq/plot';
 import alphabet from '../data/alphabet.json';
 import aapl from '../data/aapl.json';
 import mtcars from '../data/mtcars.json';
+import athletes from '../data/athletes.json';
+import gistemp from '../data/gistemp.json';
 
 const aaplDates = aapl.map((d) => ({ ...d, Date: new Date(d.Date) }));
+const gistempDates = gistemp.map((d) => ({ ...d, Date: new Date(d.Date) }));
 ---
 
 <Layout title="Autres exemples">
-	<h1 class="text-3xl font-bold">Autres exemples de la librairie Plot</h1>
-	<p class="mt-4 text-slate-700">
+	<p
+		class="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-bold tracking-[.18em] text-white/70 uppercase"
+	>
+		Galerie Observable Plot
+	</p>
+	<h1 class="font-display text-3xl tracking-tight">Autres exemples de la librairie Plot</h1>
+	<p class="mt-4 max-w-2xl text-white/65">
 		Quelques exemples classiques repris de la
-		<a class="underline" href="https://observablehq.com/@observablehq/plot-gallery">
-			galerie d'exemples d'Observable Plot
-		</a>, avec des jeux de données réduits aux seules colonnes nécessaires.
+		<a class="text-crimson underline hover:text-white" href="https://observablehq.com/@observablehq/plot-gallery"
+			>galerie d'exemples d'Observable Plot</a
+		>, avec des jeux de données réduits aux seules colonnes nécessaires (et échantillonnés quand ils sont trop
+		volumineux pour être dessinés point par point).
 	</p>
 
-	<PlotFigure
-		options={{
-			title: 'Fréquence des lettres en anglais',
-			caption: 'Figure 3. Fréquence des lettres dans la langue anglaise.',
-			ariaLabel: 'Diagramme en barres de la fréquence des lettres en anglais',
-			marginLeft: 40,
-			x: { label: 'Lettre' },
-			y: { label: 'Fréquence (%)', percent: true },
-			marks: [Plot.barY(alphabet, { x: 'letter', y: 'frequency', fill: 'steelblue' }), Plot.ruleY([0])],
-		}}
-	/>
+	<div class="mt-10 grid gap-8">
+		<PlotFigure
+			options={{
+				title: 'Fréquence des lettres en anglais',
+				caption: 'Figure 3. Fréquence des lettres dans la langue anglaise.',
+				ariaLabel: 'Diagramme en barres de la fréquence des lettres en anglais',
+				marginLeft: 40,
+				x: { label: 'Lettre' },
+				y: { label: 'Fréquence (%)', percent: true },
+				marks: [Plot.barY(alphabet, { x: 'letter', y: 'frequency', fill: '#c50337' }), Plot.ruleY([0])],
+			}}
+		/>
 
-	<PlotFigure
-		options={{
-			title: "Cours de l'action Apple (AAPL)",
-			caption: "Figure 4. Cours de clôture de l'action Apple (AAPL).",
-			ariaLabel: "Courbe du cours de clôture de l'action Apple entre 2013 et 2018",
-			x: { type: 'utc', label: null },
-			y: { grid: true, label: 'Clôture ($)' },
-			marks: [Plot.lineY(aaplDates, { x: 'Date', y: 'Close' })],
-		}}
-	/>
+		<PlotFigure
+			options={{
+				title: "Cours de l'action Apple (AAPL)",
+				caption: "Figure 4. Cours de clôture de l'action Apple (AAPL).",
+				ariaLabel: "Courbe du cours de clôture de l'action Apple entre 2013 et 2018",
+				x: { type: 'utc', label: null },
+				y: { grid: true, label: 'Clôture ($)' },
+				marks: [Plot.lineY(aaplDates, { x: 'Date', y: 'Close', stroke: '#c50337' })],
+			}}
+		/>
 
-	<PlotFigure
-		options={{
-			title: 'Consommation vs puissance des voitures',
-			subtitle: 'Jeu de données mtcars (1974 Motor Trend US)',
-			caption: 'Figure 5. Consommation (mpg) en fonction de la puissance (hp).',
-			ariaLabel: 'Nuage de points des miles par gallon en fonction de la puissance en chevaux, coloré par nombre de cylindres',
-			grid: true,
-			color: { type: 'ordinal', legend: true, label: 'Cylindres' },
-			x: { label: 'Puissance (hp)' },
-			y: { label: 'Consommation (mpg)' },
-			marks: [Plot.dot(mtcars, { x: 'hp', y: 'mpg', stroke: 'cyl', r: 'wt' })],
-		}}
-	/>
+		<PlotFigure
+			options={{
+				title: 'Consommation vs puissance des voitures',
+				subtitle: 'Jeu de données mtcars (1974 Motor Trend US)',
+				caption: 'Figure 5. Consommation (mpg) en fonction de la puissance (hp).',
+				ariaLabel:
+					'Nuage de points des miles par gallon en fonction de la puissance en chevaux, coloré par nombre de cylindres',
+				grid: true,
+				color: { type: 'ordinal', legend: true, label: 'Cylindres' },
+				x: { label: 'Puissance (hp)' },
+				y: { label: 'Consommation (mpg)' },
+				marks: [Plot.dot(mtcars, { x: 'hp', y: 'mpg', stroke: 'cyl', r: 'wt' })],
+			}}
+		/>
+
+		<PlotFigure
+			options={{
+				title: 'Taille et poids des athlètes olympiques',
+				subtitle: "Rio 2016 — échantillon 1/8ᵉ, athletes.json",
+				caption: 'Figure 6. Poids en fonction de la taille, par sexe.',
+				ariaLabel:
+					'Nuage de points du poids en fonction de la taille des athlètes olympiques, coloré par sexe',
+				grid: true,
+				color: { legend: true, label: 'Sexe' },
+				x: { label: 'Taille (m)' },
+				y: { label: 'Poids (kg)' },
+				marks: [Plot.dot(athletes, { x: 'height', y: 'weight', stroke: 'sex', r: 2, fillOpacity: 0.5 })],
+			}}
+		/>
+
+		<PlotFigure
+			options={{
+				title: 'Anomalie de température moyenne mondiale',
+				subtitle: '1880–2023, par rapport à la moyenne 1951-1980 (NASA GISTEMP)',
+				caption: 'Figure 7. gistemp.json — écart de température en °C.',
+				ariaLabel: "Graphique en aires de l'anomalie de température moyenne mondiale depuis 1880",
+				x: { type: 'utc', label: null },
+				y: { grid: true, label: 'Anomalie (°C)' },
+				marks: [
+					Plot.areaY(gistempDates, { x: 'Date', y: 'Anomaly', fill: '#c50337', fillOpacity: 0.25 }),
+					Plot.lineY(gistempDates, { x: 'Date', y: 'Anomaly', stroke: '#c50337' }),
+					Plot.ruleY([0], { stroke: 'currentColor', opacity: 0.4 }),
+				],
+			}}
+		/>
+	</div>
 </Layout>
