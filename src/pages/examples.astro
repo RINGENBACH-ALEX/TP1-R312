@@ -19,9 +19,9 @@ const aaplDates = aapl.map((d) => ({ ...d, Date: new Date(d.Date) }));
 	</p>
 
 	<PlotFigure
-		caption="Figure 3. Fréquence des lettres dans la langue anglaise."
 		options={{
 			title: 'Fréquence des lettres en anglais',
+			caption: 'Figure 3. Fréquence des lettres dans la langue anglaise.',
 			ariaLabel: 'Diagramme en barres de la fréquence des lettres en anglais',
 			marginLeft: 40,
 			x: { label: 'Lettre' },
@@ -31,9 +31,9 @@ const aaplDates = aapl.map((d) => ({ ...d, Date: new Date(d.Date) }));
 	/>
 
 	<PlotFigure
-		caption="Figure 4. Cours de clôture de l'action Apple (AAPL)."
 		options={{
 			title: "Cours de l'action Apple (AAPL)",
+			caption: "Figure 4. Cours de clôture de l'action Apple (AAPL).",
 			ariaLabel: "Courbe du cours de clôture de l'action Apple entre 2013 et 2018",
 			x: { type: 'utc', label: null },
 			y: { grid: true, label: 'Clôture ($)' },
@@ -42,10 +42,10 @@ const aaplDates = aapl.map((d) => ({ ...d, Date: new Date(d.Date) }));
 	/>
 
 	<PlotFigure
-		caption="Figure 5. Consommation (mpg) en fonction de la puissance (hp), jeu de données mtcars."
 		options={{
 			title: 'Consommation vs puissance des voitures',
 			subtitle: 'Jeu de données mtcars (1974 Motor Trend US)',
+			caption: 'Figure 5. Consommation (mpg) en fonction de la puissance (hp).',
 			ariaLabel: 'Nuage de points des miles par gallon en fonction de la puissance en chevaux, coloré par nombre de cylindres',
 			grid: true,
 			color: { type: 'ordinal', legend: true, label: 'Cylindres' },
