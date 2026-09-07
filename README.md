@@ -2,7 +2,7 @@
 
 **Nom Prénom :** RINGENBACH Alex
 
-**Site déployé (Netlify) :** _à compléter après le déploiement_
+**Site déployé (Netlify) :** https://tp-r312.netlify.app/
 
 **Dépôt GitHub :** https://github.com/RINGENBACH-ALEX/TP1-R312
 
